@@ -1,0 +1,21 @@
+class Solution {
+public:
+    int minOperations(vector<int>& nums1, vector<int>& nums2) {
+        int n = nums1.size();
+        int op = 0;
+        int no_op = 0; // no need to swap these in any case
+        for(int i=0; i<n-1; i++){
+            if(nums1[i]<=nums1[n-1] && nums2[i]<=nums2[n-1]){
+                // do nothing
+                if(nums1[i]<=nums2[n-1] && nums2[i]<=nums1[n-1]) no_op++;
+            }
+            else if(nums1[i]<=nums2[n-1] && nums2[i]<=nums1[n-1]){
+                op++;
+            }
+            else{
+                return -1;
+            }
+        }
+        return min(op, n-no_op-op);
+    }
+};
